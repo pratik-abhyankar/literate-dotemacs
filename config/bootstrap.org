@@ -109,8 +109,20 @@ Make cutting, yanking and clipboard settings better.
 	 kill-whole-line t)
 #+end_src
 
-* User Setup
+Make Emacs shift focus to help buffer whenever one opens up. I don't like
+switching to it only to quit it.
+#+begin_src elisp
+  (setq-default help-window-select t)
+#+end_src
+
+* User
 #+begin_src elisp
   (setq user-full-name "Pratik Abhyankar")
   (setq user-mail-address "abhyankarpratik@gmail.com")
+#+end_src
+
+* Server
+Start the Emacs server so I can connect to it with light weight /emacsclient/.
+#+begin_src elisp
+  (server-start)
 #+end_src

@@ -18,5 +18,9 @@ this a lot. Like.. a lot!
 #+end_src
 
 ** Ivy, Counsel and Swiper
-My de-facto general completion for Emacs. Install ~counsel~ and it will install
-~ivy~ and ~swiper~ as its dependencies. I don't do ~Helm~ or ~Ido~, don't ask why.
+My de-facto minibuffer generic completion for Emacs. I don't do ~Helm~ or ~Ido~,
+please don't ask why.
+*** Ivy
+#+begin_src elisp
+
+#+end_src

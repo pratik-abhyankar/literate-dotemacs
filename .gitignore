@@ -2,3 +2,4 @@ custom/
 eln-cache/
 straight/
 auto-save-list/
+config/*.el
