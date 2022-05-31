@@ -1,0 +1,22 @@
+#+title: Core Config
+#+author: Pratik Abhyankar
+
+* Completions
+** Which Key
+Make Emacs prompt the next possible key bindings after a short while. I rely on
+this a lot. Like.. a lot!
+#+begin_src elisp
+  (use-package which-key
+    :ensure t
+    :config
+    (setq which-key-add-column-padding 1
+          which-key-sort-uppercase-first nil
+          which-key-show-early-on-C-h t
+          which-key-idle-delay 1.0
+          which-key-idle-secondary-delay 0.05)
+    (which-key-mode))
+#+end_src
+
+** Ivy, Counsel and Swiper
+My de-facto general completion for Emacs. Install ~counsel~ and it will install
+~ivy~ and ~swiper~ as its dependencies. I don't do ~Helm~ or ~Ido~, don't ask why.

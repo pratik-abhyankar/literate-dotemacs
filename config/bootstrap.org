@@ -1,0 +1,116 @@
+#+title: Bootstrap Config
+#+author: Pratik Abhyankar
+
+* Package Manager
+I use a combination of [[https://github.com/radian-software/straight.el][straight.el]] and [[https://github.com/jwiegley/use-package][use-package]] to manage
+packages in my Emacs Config.
+** Install ~straight.el~
+I use [[https://github.com/radian-software/straight.el][straight.el]] as my package manager instead of the built-in
+~package.el~, since it allows to pull packages as Git source files
+instead of tar balls. This means, I can also load forked, modified or
+experiemntal packages that are not on Elpa or Melpa etc. It also
+allows me to create package lock files for a consistent config that
+doesn't break Emacs every time any package updates.
+
+Let's bootstrap ~straight.el~ first.
+#+begin_src elisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	(bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+	  (url-retrieve-synchronously
+	   "https://raw.githubusercontent.com/raxod502/straight.el/master/install.el"
+	   'silent 'inhibit-cookies)
+	(goto-char (point-max))
+	(eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+#+end_src
+
+** Install ~use-package~
+[[https://github.com/jwiegley/use-package][use-package]] a macro to tidily manage package configurations. It is not
+a package manager in itself. Install ~use-package~ and configure it to
+use ~straight~ under the hood to install all packages in this config.
+#+begin_src elisp
+	(straight-use-package 'use-package)
+	(use-package straight
+				 :custom (straight-use-package-by-default t))
+	(setq use-package-always-ensure t)
+#+end_src
+
+* Defaults
+Emacs is rustic and bare-metal without any fancy config (such as
+this!). Naturally, few default settings and flags are also pretty
+crap. Let's fix it!
+** Sensible Defaults
+[[https://harryrschwartz.com/2015/11/23/sensible-defaults-el][sensible-defaults.el]] is a collection of helper functions to configure
+better defaults, created by [[https://harryrschwartz.com/][Harry R. Schwartz]]. Clone the [[https://github.com/hrs/sensible-defaults.el][github
+repository]] and load the ~sensible-defaults.el~ file from it. This is
+not an Emacs package, so ~require~ will not work.
+#+begin_src elisp
+  (straight-use-package
+    '(sensible-defaults :type git :host github :repo "hrs/sensible-defaults.el"))
+  (load-file "~/.emacs.d/straight/build/sensible-defaults/sensible-defaults.el")
+  (sensible-defaults/use-all-settings)
+  (sensible-defaults/use-all-keybindings)
+#+end_src
+
+** Better Defaults
+*** Interface
+Maximize Emacs frames at startup. I like full-screen application windows (I mean
+frames.. I swear I meant frames!)
+#+begin_src elisp
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+
+Get rid of menubar, toolbar and other stupid stuff from the Emacs frame.
+#+begin_src elisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (blink-cursor-mode -1)
+  (setq-default
+   inhibit-startup-screen t
+   initial-scratch-message "")
+#+end_src
+
+Now that the stupid stuff is gone, let's improve it by showing some useful
+things like line-numbers.
+#+begin_src elisp
+  (global-display-line-numbers-mode)
+  (column-number-mode t)
+  (global-hl-line-mode t)
+#+end_src
+
+*** Functionality
+Default TAB width in Emacs is 8. Insane! I like 2 (No not 4, I said 2). Let TAB
+indent first and then complete stuff at point.
+#+begin_src elisp
+  (setq-default
+   tab-always-indent 'complete
+   tab-width 2)
+#+end_src
+
+Disable creating lock or auto save or backup files. Though helpful, they don't
+help me much.
+#+begin_src elisp
+  (setq-default
+   auto-save-default nil
+   make-backup-files nil
+   create-lockfiles nil)
+#+end_src
+
+Make cutting, yanking and clipboard settings better.
+#+begin_src elisp
+	(setq-default
+	 select-enable-clipboard t
+	 mouse-yank-at-point t
+	 kill-whole-line t)
+#+end_src
+
+* User Setup
+#+begin_src elisp
+  (setq user-full-name "Pratik Abhyankar")
+  (setq user-mail-address "abhyankarpratik@gmail.com")
+#+end_src

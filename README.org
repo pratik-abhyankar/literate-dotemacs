@@ -1,0 +1,19 @@
+#+title: Pratik's Emacs Config
+#+author: Pratik Abhyankar
+
+* Overview
+
+* Getting Started
+
+** Directory Structure
+
+|#|File/Directory|Purpose|
+
+** Entry Point
+Emacs loads ~early-init.el~ even before ~init.el~ so setup any flags or hooks before the config loads. I use this to disable ~package.el~ at startup, since I use ~straight.el~ as my package manager.
+
+~init.el~ then sets up ~straight.el~ and loads the rest of my literate Emacs config from the ~config/~ directory using ~org-babel-load~.
+
+* Packages
+
+By default, ~straight.el~ pulls and installs all packages in the ~straight/~ directory. I override this to use the ~packages/~ directory instead. 

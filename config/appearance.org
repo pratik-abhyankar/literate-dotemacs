@@ -1,0 +1,70 @@
+#+title: Appearance Config
+#+author: Pratik Abhyankar
+
+* Custom File
+Emacs puts its customize setup in the ~init.el~ file by default. I put that in
+another file to keep ~init.el~ decluttered.
+#+begin_src elisp
+	(unless (file-exists-p CUSTOM-FILE)
+      (with-temp-buffer (write-file CUSTOM-FILE)))
+  (setq custom-file CUSTOM-FILE)
+  (load-file custom-file)
+#+end_src
+
+* Icons
+Prettify the otherwise terminal like Emacs by adding some icons here and there.
+~all-the-icons~ is just the thing we need!
+#+begin_src elisp
+	(use-package all-the-icons
+		:if (display-graphic-p)
+		:config
+		(unless (member "all-the-icons" (font-family-list))
+			(all-the-icons-install-fonts t))
+		(setq inhibit-compacting-font-caches t))
+#+end_src
+
+* Font
+I use 150 font height on Mac and 110 on my personal Linux systems. If available,
+use ~Fira Code~ font, otherwise use the default system font. I think Mac's
+default font ~Monaco~ is good too!
+#+begin_src elisp
+	(set-face-attribute 'default nil :height (if IS-MAC 150 110) :font "Fira Code")
+#+end_src
+
+* Modeline
+I like the Doom Emacs's modeline! Its quite fancy, performant and customizable!
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :init (doom-modeline-mode))
+#+end_src
+
+* Themes
+** Solarized Theme
+This is my default theme. I prefer the high contrast themes from Solarized
+family. For some reason ~use-package~ fails to load the solarized theme so I
+use ~straight.el~ to install and load it explicitly.
+#+begin_src elisp
+  (straight-use-package
+    '(solarized-emacs :type git :host github :repo "bbatsov/solarized-emacs"))
+  (require 'solarized)
+  (setq
+    x-underline-at-descent-line nil
+    solarized-scale-markdown-headlines t
+    solarized-use-variable-pitch nil)
+  (load-theme 'solarized-light-high-contrast t)
+#+end_src
+
+Based on the time of the day or place, I frequently toggle between Solarized
+dark and light theme. Let's define a helper function to make this toggling easy
+and set it to an easy keybinding of ~C-x c~.
+#+begin_src emacs-lisp
+  (setq active-theme 'solarized-light-high-contrast)
+  (defun toggle-dark-light-theme ()
+    "Toggle between dark and light mode theme."
+    (interactive)
+    (if (eq active-theme 'solarized-light-high-contrast)
+        (setq active-theme 'solarized-dark-high-contrast)
+      (setq active-theme 'solarized-light-high-contrast))
+    (load-theme active-theme t))
+  (bind-key "C-x c" 'toggle-dark-light-theme)
+#+end_src
