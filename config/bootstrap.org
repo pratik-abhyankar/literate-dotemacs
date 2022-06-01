@@ -142,4 +142,5 @@ frequenty operations in Emacs easier.
   (bind-key "M-]" 'next-buffer)
   (bind-key "M-o" 'other-window)
   (bind-key "M-`" 'other-frame)
+  (bind-key "RET" 'newline-and-indent)
 #+end_src

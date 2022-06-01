@@ -56,21 +56,41 @@ The search mechanism that Emacs makes so so powerful!
            ("RET" . ivy-alt-done)))
 #+end_src
 
-
 ** Company
+
+* Buffers
+Make ~ibuffer~ the default buffer manager. Also, I don't want to see the buffers
+that start with '*' such as ~*scratch*~ or ~*Messages*~ in the list, so I hide them.
+#+begin_src elisp
+  (use-package ibuffer
+    :bind ("C-x C-b" . ibuffer))
+  (require 'ibuf-ext)
+  (add-to-list 'ibuffer-never-show-predicates "^\\*")
+#+end_src
 
 * Editing
 ** Electric
-Teach Emacs some editing etiquette.
+Teach Emacs some code-editing etiquette. I.. shouldn't have said that. Please
+don't frown upon me!
 #+begin_src elisp
   (delete-selection-mode)
   (electric-pair-mode 1)
 #+end_src
 
 ** Undo Tree
-Well.. this does undo redo.
+Well.. this does undo redo. I don't like that it creates hidden ~~undotree~~ files
+for every buffer, but I don't know how to disable that yet.
 #+begin_src elisp
   (use-package undo-tree
     :config
     (global-undo-tree-mode t))
+#+end_src
+
+** Ws-butler
+~ws-butler~ helps trim all white spaces at the end of line. I didn't know this
+existed until I saw it in [[https://github.com/mtbar131/emacs/blob/master/custom/setup-editing.el][Amit's]] config!
+#+begin_src elisp
+  (use-package ws-butler
+    :config
+    (ws-butler-global-mode t))
 #+end_src
