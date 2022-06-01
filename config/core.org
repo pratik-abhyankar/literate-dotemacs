@@ -18,9 +18,59 @@ this a lot. Like.. a lot!
 #+end_src
 
 ** Ivy, Counsel and Swiper
-My de-facto minibuffer generic completion for Emacs. I don't do ~Helm~ or ~Ido~,
+My de-facto generic completion for Emacs. I don't do ~helm~, ~ido~ or ~vertico~;
 please don't ask why.
 *** Ivy
+~ivy~ will setup the completion mechanism and enhance buffer switching.
 #+begin_src elisp
+  (use-package ivy
+    :config
+    (ivy-mode t)
+    (setq ivy-use-virtual-buffers t
+          ivy-count-format "(%d/%d) "
+          ivy-initial-inputs-alist nil
+          enable-recursive-minibuffers t)
+    :bind (("C-x b" . ivy-switch-buffer)
+           ("C-x B" . ivy-switch-buffer-other-window)
+           ("C-c C-r" . ivy-resume)))
+#+end_src
 
+*** Swiper
+The search mechanism that Emacs makes so so powerful!
+#+begin_src elisp
+  (use-package swiper
+    :bind (("C-s" . swiper-isearch)
+           ("C-M-s" . isearch-forward-regexp)
+           ("C-M-r" . isearch-backwards-regexp)))
+#+end_src
+
+*** Counsel
+~counsel~ enhances many default Emacs commands.
+#+begin_src elisp
+  (use-package counsel
+    :bind (("M-x" . counsel-M-x)
+           ("C-x C-f" . counsel-find-file)
+           ("C-c '" . counsel-imenu)
+           ("C-c s" . counsel-rg)
+           :map counsel-find-file-map
+           ("RET" . ivy-alt-done)))
+#+end_src
+
+
+** Company
+
+* Editing
+** Electric
+Teach Emacs some editing etiquette.
+#+begin_src elisp
+  (delete-selection-mode)
+  (electric-pair-mode 1)
+#+end_src
+
+** Undo Tree
+Well.. this does undo redo.
+#+begin_src elisp
+  (use-package undo-tree
+    :config
+    (global-undo-tree-mode t))
 #+end_src

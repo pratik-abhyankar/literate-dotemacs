@@ -16,15 +16,15 @@ Let's bootstrap ~straight.el~ first.
 #+begin_src elisp
   (defvar bootstrap-version)
   (let ((bootstrap-file
-	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	(bootstrap-version 5))
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
     (unless (file-exists-p bootstrap-file)
       (with-current-buffer
-	  (url-retrieve-synchronously
-	   "https://raw.githubusercontent.com/raxod502/straight.el/master/install.el"
-	   'silent 'inhibit-cookies)
-	(goto-char (point-max))
-	(eval-print-last-sexp)))
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/master/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 #+end_src
 
@@ -33,10 +33,10 @@ Let's bootstrap ~straight.el~ first.
 a package manager in itself. Install ~use-package~ and configure it to
 use ~straight~ under the hood to install all packages in this config.
 #+begin_src elisp
-	(straight-use-package 'use-package)
-	(use-package straight
-				 :custom (straight-use-package-by-default t))
-	(setq use-package-always-ensure t)
+  (straight-use-package 'use-package)
+  (use-package straight
+    :custom (straight-use-package-by-default t))
+  (setq use-package-always-ensure t)
 #+end_src
 
 * Defaults
@@ -50,7 +50,7 @@ repository]] and load the ~sensible-defaults.el~ file from it. This is
 not an Emacs package, so ~require~ will not work.
 #+begin_src elisp
   (straight-use-package
-    '(sensible-defaults :type git :host github :repo "hrs/sensible-defaults.el"))
+   '(sensible-defaults :type git :host github :repo "hrs/sensible-defaults.el"))
   (load-file "~/.emacs.d/straight/build/sensible-defaults/sensible-defaults.el")
   (sensible-defaults/use-all-settings)
   (sensible-defaults/use-all-keybindings)
@@ -115,6 +115,13 @@ switching to it only to quit it.
   (setq-default help-window-select t)
 #+end_src
 
+I don't like switching to buffers that start with '*' such as ~*scratch*~,
+~*Messages*~ etc. while cycling through next/previous buffer. This fixes it.
+#+begin_src elisp
+  (set-frame-parameter (selected-frame) 'buffer-predicate
+                       (lambda (buf) (not (string-match-p "^*" (buffer-name buf)))))
+#+end_src
+
 * User
 #+begin_src elisp
   (setq user-full-name "Pratik Abhyankar")
@@ -125,4 +132,14 @@ switching to it only to quit it.
 Start the Emacs server so I can connect to it with light weight /emacsclient/.
 #+begin_src elisp
   (server-start)
+#+end_src
+
+* Keybindings
+This is a set of custom keybindings that I have defined to make my most
+frequenty operations in Emacs easier.
+#+begin_src elisp
+  (bind-key "M-[" 'previous-buffer)
+  (bind-key "M-]" 'next-buffer)
+  (bind-key "M-o" 'other-window)
+  (bind-key "M-`" 'other-frame)
 #+end_src
