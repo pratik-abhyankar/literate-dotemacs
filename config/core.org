@@ -81,6 +81,23 @@ the completion package under use like ~Ivy~, ~Ido~ or ~Helm~.
 #+end_src
 
 ** Company
+Completion at point for literally anything and everything in Emacs. I install
+mode specific ~company-backend~ in their respective 'mode' config files. Here I
+just setup company and its complementary packages.
+#+begin_src elisp
+  (use-package company
+    :bind (:map
+           global-map
+           ("TAB" . company-complete-common-or-cycle)
+           :map company-active-map
+           ("C-n" . company-select-next)
+           ("C-p" . company-select-previous))
+    :config
+    (setq company-ide-delay 0.05)
+    (setq company-backends '(company-capf))
+    (setq company-minimum-prefix-length 1)
+    (global-company-mode t))
+#+end_src
 
 * Buffers
 ** Ibuffer
