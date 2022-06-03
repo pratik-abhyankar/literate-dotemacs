@@ -83,6 +83,7 @@ the completion package under use like ~Ivy~, ~Ido~ or ~Helm~.
 ** Company
 
 * Buffers
+** Ibuffer
 Make ~ibuffer~ the default buffer manager. Also, I don't want to see the buffers
 that start with '*' such as ~*scratch*~ or ~*Messages*~ in the list, so I hide them.
 #+begin_src elisp
@@ -90,6 +91,13 @@ that start with '*' such as ~*scratch*~ or ~*Messages*~ in the list, so I hide t
     :bind ("C-x C-b" . ibuffer))
   (require 'ibuf-ext)
   (add-to-list 'ibuffer-never-show-predicates "^\\*")
+#+end_src
+
+** Ace-window
+This makes it easy for me to switch between different windows. Nusta zaap-zup!
+#+begin_src elisp
+  (use-package ace-window
+    :bind ("M-o" . ace-window))
 #+end_src
 
 * Editing
