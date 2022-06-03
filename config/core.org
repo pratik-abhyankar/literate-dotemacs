@@ -45,15 +45,39 @@ The search mechanism that Emacs makes so so powerful!
 #+end_src
 
 *** Counsel
-~counsel~ enhances many default Emacs commands.
+~counsel~ enhances many default Emacs commands. I don not bind ~M-x~ to ~counsel-M-x~
+since I use ~amx~ for that!
 #+begin_src elisp
   (use-package counsel
-    :bind (("M-x" . counsel-M-x)
-           ("C-x C-f" . counsel-find-file)
+    :bind (("C-x C-f" . counsel-find-file)
            ("C-c '" . counsel-imenu)
            ("C-c s" . counsel-rg)
            :map counsel-find-file-map
            ("RET" . ivy-alt-done)))
+#+end_src
+
+** Recentf
+Remember thy master's commands!
+#+begin_src elisp
+  (use-package recentf
+    :config
+    (setq recentf-auto-cleanup 'never
+          recentf-max-saved-items 50
+          recentf-save-file RECENTF-FILE)
+    (recentf-mode t)
+    :bind("C-x C-r" . recentf-open-files))
+#+end_src
+
+** Amx
+~Amx~ is an alternative interface for ~M-x~ in Emacs. It is forked from [[https://github.com/nonsequitur/smex][smex]] since it
+was no longer maintained and changed quite a bit. It automatically works with
+the completion package under use like ~Ivy~, ~Ido~ or ~Helm~.
+#+begin_src elisp
+  (use-package amx
+    :ensure t
+    :config
+    (setq amx-save-file AMX-ITEMS-FILE)
+    (amx-mode t))
 #+end_src
 
 ** Company
@@ -87,8 +111,8 @@ for every buffer, but I don't know how to disable that yet.
 #+end_src
 
 ** Ws-butler
-~ws-butler~ helps trim all white spaces at the end of line. I didn't know this
-existed until I saw it in [[https://github.com/mtbar131/emacs/blob/master/custom/setup-editing.el][Amit's]] config!
+~ws-butler~ helps trim all white spaces at the end of line. I didn't know about
+this until I saw it in [[https://github.com/mtbar131/emacs/blob/master/custom/setup-editing.el][Amit's]] config!
 #+begin_src elisp
   (use-package ws-butler
     :config

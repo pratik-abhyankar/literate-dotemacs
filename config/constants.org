@@ -15,7 +15,14 @@ Define system variables like OS name or Emacs version etc.
 
 * Custom files and directories
 #+begin_src elisp
-	(defconst CUSTOM-DIR "custom/")
-	(defconst CONFIG-DIR "config/")
-	(defconst CUSTOM-FILE (expand-file-name (concat user-emacs-directory CUSTOM-DIR "custom-file.el")))
+  (defconst CONFIG-DIR-NAME "config/")
+
+  (defconst CUSTOM-DIR-NAME "custom/")
+  (defconst CUSTOM-DIR (expand-file-name (concat user-emacs-directory CUSTOM-DIR-NAME)))
+  (unless (file-directory-p CUSTOM-DIR)
+    (make-directory CUSTOM-DIR))
+
+  (defconst CUSTOM-FILE (expand-file-name "custom-file.el" CUSTOM-DIR))
+  (defconst RECENTF-FILE (expand-file-name "recentf" CUSTOM-DIR))
+  (defconst AMX-ITEMS-FILE (expand-file-name "amx-items" CUSTOM-DIR))
 #+end_src

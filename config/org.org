@@ -10,11 +10,9 @@ to keep asking me for confirmation to execute code blocks.
 	(setq-default  org-confirm-babel-evaluate nil)
 #+end_src
 
-General ~Org~ config and bindings.
+All my ~org~ files usually reside in the ~~/org~ directory.
 #+begin_src elisp
-  (setq org-directory "~/org")               ;; My default 'org' directory
-  (bind-key "C-c a" 'org-agenda)             ;; Set 'C-c a' keybinding to open 'org-agenda'
-  (bind-key "C-c c" 'org-capture)            ;; Set 'C-c c' keybinding to execute 'org-capture'
+  (setq org-directory "~/org")
 #+end_src
 
 Make ~Org~ look subtly better.
@@ -30,12 +28,12 @@ Make ~Org~ look subtly better.
 
 Workflow settings for TODO items.
 #+begin_src elisp
-	(setq-default
-	 org-log-into-drawer t                     ;; Use LOGBOOK drawer to take notes
-	 org-log-done t                            ;; Add 'closed' log when marked done
-	 org-special-ctrl-a/e t                    ;; C-{a,e} should behave differently on headings
-	 org-enforce-todo-dependencies t           ;; Enforce tasks should be completed in order
-	 org-enforce-todo-checkbox-dependencies t) ;; Enforce checklist items should be completed in order
+  (setq-default
+   org-log-into-drawer t                     ;; Use LOGBOOK drawer to take notes
+   org-log-done t                            ;; Add 'closed' log when marked done
+   org-special-ctrl-a/e t                    ;; C-{a,e} should behave differently on headings
+   org-enforce-todo-dependencies t           ;; Enforce tasks should be completed in order
+   org-enforce-todo-checkbox-dependencies t) ;; Enforce checklist items should be completed in order
 #+end_src
 
 ~Org~ agenda settings.
@@ -79,3 +77,11 @@ Let's also configure the org-todo-keyword-faces to match the ~Solarized~ theme t
 #+end_src
 
 * Packages
+
+* Keybindings
+Setup custom keybindings specific to ~Org~ mode.
+#+begin_src elisp
+  (bind-key "C-c a" 'org-agenda)
+  (bind-key "C-c c" 'org-capture)
+  (bind-key "C-c i b" 'org-indent-block)     ;; Handy keybinding to indent my 'org-blocks' in config
+#+end_src
