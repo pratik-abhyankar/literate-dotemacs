@@ -126,3 +126,14 @@ this until I saw it in [[https://github.com/mtbar131/emacs/blob/master/custom/se
     :config
     (ws-butler-global-mode t))
 #+end_src
+
+
+* Searching and Sorting
+** Avy
+~Avy~ is a go-to char utility similar to ~ace-jump~ but a little better! Allows me
+to jump to any character/word on the visible buffer.
+#+begin_src elisp
+  (use-package avy
+    :bind (("C-;" . avy-goto-char)
+           ("C-:" . avy-goto-line)))
+#+end_src

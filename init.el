@@ -12,8 +12,8 @@
 (require 'org)
 (require 'ob-tangle)
 
-					; By default, org-babel :tangle is set to "no". Change it to "yes" so that
-					; all literate config config files are tangled and loaded by 'org-babel'.
+; By default, org-babel :tangle is set to "no". Change it to "yes" so that
+; all literate config config files are tangled and loaded by 'org-babel'.
 (setq org-babel-default-header-args
       (cons '(:tangle . "yes")
             (assq-delete-all :tangle org-babel-default-header-args)))

@@ -97,6 +97,7 @@ help me much.
 #+begin_src elisp
   (setq-default
    auto-save-default nil
+   auto-save-list-file-prefix nil
    make-backup-files nil
    create-lockfiles nil)
 #+end_src
