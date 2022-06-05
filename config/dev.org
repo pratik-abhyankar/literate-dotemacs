@@ -1,2 +1,108 @@
 #+title: Development Config
 #+author: Pratik Abhyankar
+
+This file contains generic programming/software-development related packages for
+project management or version control etc. Any language specific config would be
+in their respective literate mode config files. For example, any config specific
+to ~Java~ would be inside ~java-mode.org~ file.
+
+* Version Control
+** Magit
+Manage all ~git~ operations like a pro from Emacs. The best version control
+package out there in my opinion!
+#+begin_src elisp
+  (use-package magit
+    :bind ("C-x g" . magit-status))
+#+end_src
+
+** Git Gutter
+A complimentary package for version control that shows signs for added, modified
+or removed lines as detected by ~git~ in the gutter. Really helps me to go through
+all changes in a buffer at a glance!
+#+begin_src elisp
+  (use-package git-gutter
+    :config
+    (global-git-gutter-mode t))
+#+end_src
+
+* Project Management
+** Projectile
+#+begin_src elisp
+  (use-package projectile
+    :bind ("C-x f" . projectile-find-file)
+    :config
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (setq projectile-completion-system 'ivy)
+    (setq projectile-cache-file PROJECTILE-BOOKMARKS-FILE
+          projectile-known-projects-file PROJECTILE-KNOWN-PROJECTS-FILE)
+    (projectile-mode t))
+#+end_src
+
+** Treemacs
+The best sidepanel in Emacs! Coming from other editors like ~Intellij~, ~VS Code~ or
+~Sublime~ I have gottern used to using a sidepanel while working with code. I like
+the idea of having the entire project structure visible to me at all times.
+Allows my pea size brain think 0.064% faster and better!
+#+begin_src elisp
+  (use-package treemacs
+    :config
+    (treemacs-project-follow-mode t)
+    (treemacs-follow-mode t)
+    (treemacs-git-mode 'extended)
+    (treemacs-filewatch-mode t)
+    (treemacs-indent-guide-mode t)
+    :bind(("M-0" . treemacs-select-window)
+          ("C-M-0" . treemacs)))
+#+end_src
+
+** Treemacs-Projectile
+Treemacs integration for projects managed with ~projectile~. 2 packages decided to
+play nice, for once!
+#+begin_src elisp
+  (use-package treemacs-projectile
+    :after projectile treemacs)
+#+end_src
+
+* Language Server Protocol (LSP)
+** LSP Core
+The core ~lsp-mode~ package. This is required. No exceptions. Unless you use
+~eglot~, in which case you suck and you are not my friend. Just kidding, you
+probably suck anyway! (damn, that was dark.. I am 59% sorry for that)
+#+begin_src elisp
+  (use-package lsp-mode
+    :bind ("C-c l" . lsp-keymap-prefix)
+    :hook ((lsp-mode . lsp-enable-which-key-integration)
+           (java-mode . lsp-deferred)
+           (python-mode . lsp-deferred)
+           (js-mode . lsp-deferred)
+           (go-mode . lsp-deferred)
+           (dart-mode . lsp-deferred)
+           (elixir-mode . lsp-deferred)
+           (html-mode . lsp-deferred)
+           (json-mode . lsp-deferred)
+           (markdown-mode . lsp-deferred)
+           (svelte-mode . lsp-deferred))
+    :commands lsp lsp-deferred)
+#+end_src
+
+** LSP UI
+Helper package for ~lsp-mode~ that shows nice lsp messages on the window in
+real-time on the side.
+#+begin_src elisp
+  (use-package lsp-ui
+    :commands lsp-ui-mode)
+#+end_src
+
+** LSP Ivy
+Since I use ~Ivy~ for generic completion, LSP can integrate with that to provide
+even better completion!
+#+begin_src elisp
+  (use-package lsp-ivy
+    :commands lsp-ivy-workspace-symbol)
+#+end_src
+
+** DAP
+The debugging lifeline in LSP! I very much require it when I am working with ~Java~!
+#+begin_src elisp
+  (use-package dap-mode)
+#+end_src

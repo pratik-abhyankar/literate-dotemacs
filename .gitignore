@@ -3,5 +3,6 @@ eln-cache/
 straight/
 auto-save-list/
 config/*.el
+.cache/
 
 *~undo-tree~

@@ -25,4 +25,6 @@ Define system variables like OS name or Emacs version etc.
   (defconst CUSTOM-FILE (expand-file-name "custom-file.el" CUSTOM-DIR))
   (defconst RECENTF-FILE (expand-file-name "recentf" CUSTOM-DIR))
   (defconst AMX-ITEMS-FILE (expand-file-name "amx-items" CUSTOM-DIR))
+  (defconst PROJECTILE-BOOKMARKS-FILE (expand-file-name "projectile-bookmarks.eld" CUSTOM-DIR))
+  (defconst PROJECTILE-KNOWN-PROJECTS-FILE (expand-file-name "projectile-known-projects.eld" CUSTOM-DIR))
 #+end_src
