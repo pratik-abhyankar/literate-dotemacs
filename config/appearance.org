@@ -24,11 +24,9 @@ Prettify the otherwise terminal like Emacs by adding some icons here and there.
 #+end_src
 
 * Font
-I use 150 font height on Mac and 110 on my personal Linux systems. If available,
-use ~Fira Code~ font, otherwise use the default system font. I think Mac's
-default font ~Monaco~ is good too!
+I use 150 font height on Mac and 110 on my personal Linux systems.
 #+begin_src elisp
-	(set-face-attribute 'default nil :height (if IS-MAC 150 110) :font "Fira Code")
+	(set-face-attribute 'default nil :height (if IS-MAC 150 110))
 #+end_src
 
 * Modeline
