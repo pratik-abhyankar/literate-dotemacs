@@ -4,5 +4,6 @@ straight/
 auto-save-list/
 config/*.el
 .cache/
+transient/
 
 *~undo-tree~

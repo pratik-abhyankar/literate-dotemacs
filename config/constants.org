@@ -27,4 +27,7 @@ Define system variables like OS name or Emacs version etc.
   (defconst AMX-ITEMS-FILE (expand-file-name "amx-items" CUSTOM-DIR))
   (defconst PROJECTILE-BOOKMARKS-FILE (expand-file-name "projectile-bookmarks.eld" CUSTOM-DIR))
   (defconst PROJECTILE-KNOWN-PROJECTS-FILE (expand-file-name "projectile-known-projects.eld" CUSTOM-DIR))
+  (defconst TRANSIENT-HISTORY-FILE (expand-file-name "history.el" CUSTOM-DIR))
+  (defconst TRANSIENT-VALUES-FILE (expand-file-name "values.el" CUSTOM-DIR))
+  (defconst TRANSIENT-LEVELS-FILE (expand-file-name "levels.el" CUSTOM-DIR))
 #+end_src

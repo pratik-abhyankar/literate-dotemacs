@@ -15,6 +15,18 @@ package out there in my opinion!
     :bind ("C-x g" . magit-status))
 #+end_src
 
+** Transient
+This is a helper utility that improves ~magit~ experience even further by hinting
+the next possible keys/functions after pressing a prefix/suffix key similar to
+~which-key~. By default ~magit~ create a /transient/ directory in the
+~user-emacs-directory~. I put them in to the ~custom~ sub-directory instead.
+#+begin_src elisp
+  (use-package transient
+    :config (setq transient-levels-file TRANSIENT-LEVELS-FILE
+                  transient-values-file TRANSIENT-VALUES-FILE
+                  transient-history-file TRANSIENT-HISTORY-FILE))
+#+end_src
+
 ** Git Gutter
 A complimentary package for version control that shows signs for added, modified
 or removed lines as detected by ~git~ in the gutter. Really helps me to go through
@@ -61,6 +73,14 @@ play nice, for once!
 #+begin_src elisp
   (use-package treemacs-projectile
     :after projectile treemacs)
+#+end_src
+
+** Treemacs Magit
+Treemacs integration for ~magit~. This helps ~treemacs~ to become more consistent
+with version control such as syncing file changes.
+#+begin_src elisp
+  (use-package treemacs-magit
+    :after treemacs magit)
 #+end_src
 
 * Language Server Protocol (LSP)

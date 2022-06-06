@@ -1,0 +1,54 @@
+#+title: Eloquence Config
+#+author: Pratik Abhyankar
+
+The name is a little confusing, I know. This literate config file handles setup
+and packages related to reading articles/books and writing. I couldn't think of a better name,
+but any suggestions are welcome!
+
+* Spell-o-spell
+** Flycheck
+I am using ~flycheck~ for spell checking in my config, though a built-in package
+~flymake~ is available for Emacs versions 26+.
+#+begin_src elisp
+  (use-package flycheck
+    :init (global-flycheck-mode))
+#+end_src
+
+** Define Word
+Defines the word at point.
+#+begin_src elisp
+  (use-package define-word
+    :bind ("C-c w" . define-word-at-point))
+#+end_src
+
+* Reading
+PDF tools for reading PDF files in Emacs. I disable line numbers when opening a
+PDF since it messes up Emacs performance.
+#+begin_src elisp
+  (use-package pdf-tools
+    :mode ("\\.pdf\\'" . pdf-view-mode)
+    :config
+    (pdf-tools-install)
+    (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1)))
+    (setq-default pdf-view-display-size 'fit-page))
+#+end_src
+
+* Writing
+** Markdown
+I agree ~org~ is better, but I need to work with markdown every now and then
+especially for work related documents. I use ~pandoc~ for extended markdown
+support like converting files to/from markdown formats or live previews etc. If
+it is installed on the system then it will use it, otherwise the extended
+features would not be available.
+
+If you are using Mac, you can install pandoc with ~brew install pandoc~.
+If you are using Debian (like Ubuntu) with ~apt~ support, then you can install
+pandoc with ~sudo apt install pandoc~.
+#+begin_src elisp
+  (use-package markdown-mode
+    :mode ("README\\.md\\'" . gfm-mode)
+    :config
+    (cond
+     ((executable-find "pandoc")
+     (setq markdown-command "pandoc"))))
+#+end_src
