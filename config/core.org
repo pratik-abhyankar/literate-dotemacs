@@ -145,6 +145,13 @@ this until I saw it in [[https://github.com/mtbar131/emacs/blob/master/custom/se
 #+end_src
 
 
+** Expand Region
+God-like tool! Allows me to progressively mark and expand region.
+#+begin_src elisp
+  (use-package expand-region
+    :bind ("C-=" . er/expand-region))
+#+end_src
+
 * Searching and Sorting
 ** Avy
 ~Avy~ is a go-to char utility similar to ~ace-jump~ but a little better! Allows me
