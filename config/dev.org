@@ -126,3 +126,20 @@ The debugging lifeline in LSP! I very much require it when I am working with ~Ja
 #+begin_src elisp
   (use-package dap-mode)
 #+end_src
+
+* REPL and Terminal
+** Vterm
+[[https://github.com/akermu/emacs-libvterm/][vterm]] is a full fledged terminal emulator based on ~libvterm~. I like it better
+than available shell terminals such as ~eshell~, ~shell~ or ~term~. ~Projectile~ has
+built-in support for ~vterm~ as well. *Note*: ~vterm~ requires ~cmake~, ~libtool~ and
+~libtool-bin~ installed on your system already for compilation. Since I use Ubuntu
+as my primary OS, I install these required libraries through this config without
+having to install them explicitly, using ~apt~. It may prompt for password.
+#+begin_src elisp
+  (unless (and (executable-find "cmake") (executable-find "libtool"))
+    (when IS-LINUX
+      (async-shell-command "sudo -S apt install cmake libtool libtool-bin"))
+    (when IS-MAC
+      (async-shell-command "brew install cmake libtool libtool-bin")))
+  (use-package vterm)
+#+end_src

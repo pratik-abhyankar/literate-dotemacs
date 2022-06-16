@@ -1,0 +1,7 @@
+#+title: Ledger Mode Config
+#+author: Pratik Abhyankar
+
+* Install ~ledger-mode~
+#+begin_src elisp
+  (use-package ledger-mode)
+#+end_src

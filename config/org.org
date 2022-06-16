@@ -77,6 +77,13 @@ Let's also configure the org-todo-keyword-faces to match the ~Solarized~ theme t
 #+end_src
 
 * Packages
+** Org-superstar
+A better successor to ~org-bullets~. Makes the Org bullets look fancy.
+#+begin_src elisp
+  (use-package org-superstar
+    :config
+    (org-superstar-mode t))
+#+end_src
 
 * Keybindings
 Setup custom keybindings specific to ~Org~ mode.
