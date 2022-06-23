@@ -12,8 +12,8 @@
 (require 'org)
 (require 'ob-tangle)
 
-; By default, org-babel :tangle is set to "no". Change it to "yes" so that
-; all literate config config files are tangled and loaded by 'org-babel'.
+;; By default, org-babel :tangle is set to "no". Change it to "yes" so that
+;; all literate config config files are tangled and loaded by 'org-babel'.
 (setq org-babel-default-header-args
       (cons '(:tangle . "yes")
             (assq-delete-all :tangle org-babel-default-header-args)))
@@ -27,7 +27,7 @@
   (defconst EL-CONFIG-FILE (expand-file-name (concat CONFIG-DIR file ".el")))
   (org-babel-tangle-file ORG-CONFIG-FILE)
   (if (file-exists-p EL-CONFIG-FILE)
-    (org-babel-load-file ORG-CONFIG-FILE)))
+			(org-babel-load-file ORG-CONFIG-FILE)))
 
 (defun pratik/load-mode-config-file (file)
   "Load a literate org mode config FILE from the 'config/modes/' directory."
@@ -49,4 +49,18 @@
 (pratik/load-mode-config-file "ledger")
 (pratik/load-mode-config-file "python")
 
+
+;; Define a helper function to assign shortcut keys to 'find-file' frequently
+;; used files. I use this to open this 'init.el' and other daily used 'org' files.
+;; Adapted from https://zzamboni.org blog.
+(defun pratik/add-file-keybinding (key file desc)
+	"Assign KEY as binding to open FILE repredented by an optional DESC."
+  (let ((key key)
+				(file file)
+				(desc desc))
+		(global-set-key (kbd key) (lambda () (interactive) (find-file file)))
+		(which-key-add-key-based-replacements key (or desc file))))
+
+(pratik/add-file-keybinding "C-c z d" (expand-file-name "diet.org" org-directory) "Diet Tracker")
+(pratik/add-file-keybinding "C-c z r" (expand-file-name "reading-list.org" org-directory) "Reading List")
 ;;; init.el ends here
