@@ -143,3 +143,23 @@ having to install them explicitly, using ~apt~. It may prompt for password.
       (async-shell-command "brew install cmake libtool libtool-bin")))
   (use-package vterm)
 #+end_src
+
+
+* Code Completion
+** Yasnippet
+Expands abbreviations into function templates. I just enable it everywhere for
+all modes. Gives me pretty handy completions especially for c++ and python which
+I use for competitive coding!
+#+begin_src elisp
+  (use-package yasnippet
+    :config
+    (yas-global-mode t))
+#+end_src
+
+** Yasnippet-snippets
+~yasnippet~ does not bundle the snippets itself in its package. We have to get
+them from its official repository to make snippets work for our desired
+languages.
+#+begin_src elisp
+  (use-package yasnippet-snippets)
+#+end_src

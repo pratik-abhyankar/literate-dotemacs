@@ -84,6 +84,21 @@ A better successor to ~org-bullets~. Makes the Org bullets look fancy.
     :config
     (org-superstar-mode t))
 #+end_src
+** Org-journal
+Reviewing my each day through this awesome journaling system allows me to track
+my mental and physical growth. I use it to write down my thoughts at the end of
+the day like a memoir, for diet & calorie tracking as well as tracking my
+habits. I use 1 file - 1 day approach with ~org-journal~ and DO NOT follow the
+weird US style date format where month comes before the day.
+#+begin_src elisp
+  (use-package org-journal
+    :init
+    (setq org-journal-prefix-key "C-c j")
+    :config
+    (setq org-journal-dir (expand-file-name "journal/" org-directory)
+          org-journal-file-type 'daily
+          org-journal-date-format "%A, %d %B %Y"))
+#+end_src
 
 * Keybindings
 Setup custom keybindings specific to ~Org~ mode.
