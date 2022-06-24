@@ -41,13 +41,23 @@ all changes in a buffer at a glance!
 ** Projectile
 #+begin_src elisp
   (use-package projectile
-    :bind ("C-x f" . projectile-find-file)
     :config
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (setq projectile-completion-system 'ivy)
     (setq projectile-cache-file PROJECTILE-BOOKMARKS-FILE
           projectile-known-projects-file PROJECTILE-KNOWN-PROJECTS-FILE)
     (projectile-mode t))
+#+end_src
+
+** Counsel-projectile
+Projectile offers built-in support for ~ivy~. ~counsel-projectile~ takes advantage
+of this to improve ~projectile~'s some of the default functions for /finding/ and /searching/.
+#+begin_src elisp
+  (use-package counsel-projectile
+    :after projectile counsel
+    :bind ("C-x f" . counsel-projectile-find-file)
+    :config
+    (counsel-projectile-mode t))
 #+end_src
 
 ** Treemacs

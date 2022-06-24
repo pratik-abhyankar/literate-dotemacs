@@ -45,7 +45,7 @@ The search mechanism that Emacs makes so so powerful!
 #+end_src
 
 *** Counsel
-~counsel~ enhances many default Emacs commands. I don not bind ~M-x~ to ~counsel-M-x~
+~counsel~ enhances many default Emacs commands. I do not bind ~M-x~ to ~counsel-M-x~
 since I use ~amx~ for that!
 #+begin_src elisp
   (use-package counsel
@@ -54,6 +54,21 @@ since I use ~amx~ for that!
            ("C-c s" . counsel-rg)
            :map counsel-find-file-map
            ("RET" . ivy-alt-done)))
+#+end_src
+
+*** Ivy-rich
+Makes ~ivy~ richer in completion by displaying helpful metadata on ~ivy~ and ~counsel~
+commands. Since I also use ~all-the-icons-ivy-rich~ package that I load from the
+[[file:appearance.org][appearance.org]] literate config file, I install and enable ~ivy-rich~ after that
+package has loaded to avoid performance issues.
+#+begin_src elisp
+  (use-package ivy-rich
+    :init
+    (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+    (setq ivy-rich-path-style 'abbrev)
+    :after counsel-projectile all-the-icons-ivy-rich
+    :config
+    (ivy-rich-mode t))
 #+end_src
 
 ** Recentf

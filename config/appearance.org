@@ -12,6 +12,7 @@ another file to keep ~init.el~ decluttered.
 #+end_src
 
 * Icons
+** All-the-icons
 Prettify the otherwise terminal like Emacs by adding some icons here and there.
 ~all-the-icons~ is just the thing we need!
 #+begin_src elisp
@@ -21,6 +22,30 @@ Prettify the otherwise terminal like Emacs by adding some icons here and there.
 		(unless (member "all-the-icons" (font-family-list))
 			(all-the-icons-install-fonts t))
 		(setq inhibit-compacting-font-caches t))
+#+end_src
+
+** All-the-icons-ibuffer
+Beautifies the ~ibuffer~ by showing relevant icons besides the buffer names.
+#+begin_src elisp
+  (use-package all-the-icons-ibuffer
+    :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
+    :after all-the-icons
+    :config
+    (setq all-the-icons-ibuffer-display-predicate #'display-graphic-p
+          all-the-icons-ibuffer-color-icon t
+          all-the-icons-ibuffer-icon t))
+#+end_src
+
+** All-the-icons-ivy-rich
+Beautifies the ivy buffer menu by displaying relevant icons besides the buffer names.
+#+begin_src elisp
+  (use-package all-the-icons-ivy-rich
+    :init
+    (all-the-icons-ivy-rich-mode t)
+    :config
+    (setq all-the-icons-ivy-rich-project t
+          all-the-icons-ivy-rich-color-icon t
+          all-the-icons-ivy-rich-icon t))
 #+end_src
 
 * Font
