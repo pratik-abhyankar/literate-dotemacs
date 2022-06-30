@@ -1,7 +1,31 @@
 #+title: Ledger Mode Config
 #+author: Pratik Abhyankar
 
-* Install ~ledger-mode~
+I manage most of my personal accounting with ~ledger~. It's an incredibly powerful
+text-based double-entry accounting system. If you are not aware of it, you can
+learn more about it [[https://www.ledger-cli.org/3.0/doc/ledger-mode.html][here]].
+
+* Ledger-mode
+As the name says [[https://github.com/ledger/ledger-mode][ledger-mode]] package adds support and customization to the
+~ledger~ tool. Company backends make it easy for me to complete my entries and
+adds more functionality for easy adding/removing entries and generating reports.
+~ledger-mode~ requires that the original ~ledger-cli~ binary is already installed on
+the system. My config will try to install it automatically if it is not
+already installed for Debian based distros like Ubuntu or Fedora with ~apt~, and
+for MacOS with ~brew~.
 #+begin_src elisp
+  (unless (executable-find "ledger")
+    (when IS-LINUX
+      (async-shell-command "sudo -S apt install ledger"))
+    (when IS-MAC
+      (async-shell-command "brew install ledger")))
   (use-package ledger-mode)
+#+end_src
+
+* Flycheck-ledger
+A supplimentary package for spellcheck in ledger mode. Did I tell you that this
+and ~ledger-mode~ itself are both maintained by [[https://github.com/purcell][purcell]]!
+#+begin_src elisp
+  (use-package flycheck-ledger
+    :after flycheck ledger-mode)
 #+end_src

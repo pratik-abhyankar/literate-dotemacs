@@ -1,0 +1,36 @@
+#+title: Rust Config
+#+author: Pratik Abhyankar
+
+* Rust-mode
+Primary package that adds syntax highlighting, indentation and integration with
+~cargo~ etc. This config will also try to install ~rustfmt~ that is required for
+formatting ~rust~ code.
+#+begin_src elisp
+  (use-package rust-mode
+    :config
+    (setq rust-format-on-save t))
+  (shell-command "rustup component add rustfmt")
+  (add-to-list 'exec-path "~/.cargo/bin")
+#+end_src
+
+* Tree-sitter
+The ~rust-mode~ Github wiki suggests using ~tree-sitter~ for better code editing.
+#+begin_src elisp
+  (use-package tree-sitter
+    :config
+    (require 'tree-sitter-langs)
+    (global-tree-sitter-mode)
+    :hook
+    (tree-sitter-after-on-hook . tree-sitter-hl-mode))
+#+end_src
+
+* Cargo
+Where there is ~rust~, there is ~cargo~! This makes all ~cargo~ commands conveniently
+available within Emacs.
+#+begin_src elisp
+  (use-package cargo
+    :hook
+    (rust-mode . cargo-minor-mode)
+    :config
+    (define-key cargo-mode-map (kbd "C-c C-x") 'cargo-minor-mode-command-map))
+#+end_src
