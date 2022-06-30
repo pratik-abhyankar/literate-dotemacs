@@ -63,4 +63,16 @@
 
 (pratik/add-file-keybinding "C-c z d" (expand-file-name "diet.org" org-directory) "Diet Tracker")
 (pratik/add-file-keybinding "C-c z r" (expand-file-name "reading-list.org" org-directory) "Reading List")
+
+;; Automatically creates a new ledger file every month, and a ledger directory
+;; every new year and assigns a hotkey binding to open the current ledger file.
+(defvar pratik/accounting-directory "~/accounting")
+(defvar pratik/accounting-ledgers-directory "ledgers/")
+(defvar pratik/accounting-reports-directory "reports/")
+(pratik/add-file-keybinding "C-c z l"(expand-file-name
+																			(concat (format-time-string "%Y/")
+																							pratik/accounting-ledgers-directory
+																							(downcase (format-time-string "%B.ledger")))
+																			pratik/accounting-directory) "Ledger")
+
 ;;; init.el ends here
