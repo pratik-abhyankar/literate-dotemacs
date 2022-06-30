@@ -83,6 +83,15 @@ things like line-numbers.
   (global-hl-line-mode t)
 #+end_src
 
+I need to see the time and battery status often since I usually work with
+fullscreen mode in Emacs. It's convenient for me to have that information on the
+modeline.
+#+begin_src elisp
+  (display-time)
+  (display-battery-mode)
+  (setq battery-update-interval 60)
+#+end_src
+
 *** Functionality
 Default TAB width in Emacs is 8. Insane! I like 2 (No not 4, I said 2). Let TAB
 indent first and then complete stuff at point.

@@ -5,8 +5,8 @@
 Emacs puts its customize setup in the ~init.el~ file by default. I put that in
 another file to keep ~init.el~ decluttered.
 #+begin_src elisp
-	(unless (file-exists-p CUSTOM-FILE)
-      (with-temp-buffer (write-file CUSTOM-FILE)))
+  (unless (file-exists-p CUSTOM-FILE)
+    (with-temp-buffer (write-file CUSTOM-FILE)))
   (setq custom-file CUSTOM-FILE)
   (load-file custom-file)
 #+end_src
@@ -16,12 +16,12 @@ another file to keep ~init.el~ decluttered.
 Prettify the otherwise terminal like Emacs by adding some icons here and there.
 ~all-the-icons~ is just the thing we need!
 #+begin_src elisp
-	(use-package all-the-icons
-		:if (display-graphic-p)
-		:config
-		(unless (member "all-the-icons" (font-family-list))
-			(all-the-icons-install-fonts t))
-		(setq inhibit-compacting-font-caches t))
+  (use-package all-the-icons
+    :if (display-graphic-p)
+    :config
+    (unless (member "all-the-icons" (font-family-list))
+      (all-the-icons-install-fonts t))
+    (setq inhibit-compacting-font-caches t))
 #+end_src
 
 ** All-the-icons-ibuffer
@@ -51,14 +51,17 @@ Beautifies the ivy buffer menu by displaying relevant icons besides the buffer n
 * Font
 I use 150 font height on Mac and 110 on my personal Linux systems.
 #+begin_src elisp
-	(set-face-attribute 'default nil :height (if IS-MAC 150 110))
+  (set-face-attribute 'default nil :height (if IS-MAC 150 110) :font "Fira Code")
 #+end_src
 
 * Modeline
 I like the Doom Emacs's modeline! Its quite fancy, performant and customizable!
 #+begin_src emacs-lisp
-(use-package doom-modeline
-  :init (doom-modeline-mode))
+  (use-package doom-modeline
+    :init (doom-modeline-mode)
+    :config
+    (setq doom-modeline-enable-word-count t
+          doom-modeline-indent-info t))
 #+end_src
 
 * Themes
