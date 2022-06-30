@@ -3,6 +3,7 @@ eln-cache/
 straight/
 auto-save-list/
 config/*.el
+config/modes/*.el
 .cache/
 transient/
 
