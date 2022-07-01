@@ -147,6 +147,7 @@ for every buffer, but I don't know how to disable that yet.
 #+begin_src elisp
   (use-package undo-tree
     :config
+    (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/custom/undo/")))
     (global-undo-tree-mode t))
 #+end_src
 
