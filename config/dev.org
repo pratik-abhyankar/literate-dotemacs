@@ -73,6 +73,7 @@ Allows my pea size brain think 0.064% faster and better!
     (treemacs-git-mode 'extended)
     (treemacs-filewatch-mode t)
     (treemacs-indent-guide-mode t)
+    (treemacs-resize-icons 16)
     :bind(("M-0" . treemacs-select-window)
           ("C-M-0" . treemacs)))
 #+end_src
