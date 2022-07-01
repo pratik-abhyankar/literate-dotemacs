@@ -100,7 +100,6 @@ The core ~lsp-mode~ package. This is required. No exceptions. Unless you use
 probably suck anyway! (damn, that was dark.. I am 59% sorry for that)
 #+begin_src elisp
   (use-package lsp-mode
-    :bind ("C-c l" . lsp-keymap-prefix)
     :hook ((lsp-mode . lsp-enable-which-key-integration)
            (java-mode . lsp-deferred)
            (rust-mode . lsp-deferred)
@@ -113,7 +112,9 @@ probably suck anyway! (damn, that was dark.. I am 59% sorry for that)
            (json-mode . lsp-deferred)
            (markdown-mode . lsp-deferred)
            (svelte-mode . lsp-deferred))
-    :commands lsp lsp-deferred)
+    :commands (lsp lsp-deferred)
+    :config
+    (define-key lsp-mode-map (kbd "C-c l") lsp-command-map))
 #+end_src
 
 ** LSP UI
