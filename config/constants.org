@@ -22,6 +22,11 @@ Define system variables like OS name or Emacs version etc.
   (unless (file-directory-p CUSTOM-DIR)
     (make-directory CUSTOM-DIR))
 
+  (defconst SPELL-FU-DIR-NAME "spell-fu/")
+  (defconst SPELL-FU-DIR (expand-file-name (concat CUSTOM-DIR SPELL-FU-DIR-NAME)))
+  (unless (file-directory-p SPELL-FU-DIR)
+    (make-directory SPELL-FU-DIR))
+
   (defconst CUSTOM-FILE (expand-file-name "custom-file.el" CUSTOM-DIR))
   (defconst RECENTF-FILE (expand-file-name "recentf" CUSTOM-DIR))
   (defconst AMX-ITEMS-FILE (expand-file-name "amx-items" CUSTOM-DIR))

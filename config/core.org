@@ -133,6 +133,14 @@ This makes it easy for me to switch between different windows. Nusta zaap-zup!
 #+end_src
 
 * Editing
+** Flycheck
+I use ~flycheck~ for error checking in my config, though a built-in package
+~flymake~ is available for Emacs versions 26+.
+#+begin_src elisp
+  (use-package flycheck
+    :init (global-flycheck-mode))
+#+end_src
+
 ** Electric
 Teach Emacs some code-editing etiquette. I.. shouldn't have said that. Please
 don't frown upon me!

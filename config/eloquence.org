@@ -6,12 +6,37 @@ and packages related to reading articles/books and writing. I couldn't think of 
 but any suggestions are welcome!
 
 * Spell-o-spell
-** Flycheck
-I am using ~flycheck~ for spell checking in my config, though a built-in package
-~flymake~ is available for Emacs versions 26+.
+** Spell-fu
+Spell checker for Emacs. ~spell-fu~ uses ~aspell~ to generate its word dictionary. I
+believe ~aspell~ is installed on ~Ubuntu~ out-of-the-box, but for ~Mac~ that's not the
+case. So I first try to install that with ~brew~.
 #+begin_src elisp
-  (use-package flycheck
-    :init (global-flycheck-mode))
+  (when IS_MAC
+    (async-shell-command "brew install aspell"))
+
+  (use-package spell-fu
+    :config
+    (setq spell-fu-directory SPELL-FU-DIR)
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (setq spell-fu-faces-exclude
+                      '(org-block-begin-line
+                        org-block-end-line
+                        org-block
+                        org-code
+                        org-date
+                        org-drawer org-document-info-keyword
+                        org-ellipsis
+                        org-link
+                        org-meta-line
+                        org-properties
+                        org-properties-value
+                        org-special-keyword
+                        org-src
+                        org-tag
+                        org-verbatim))
+                (spell-fu-mode)))
+    (global-spell-fu-mode))
 #+end_src
 
 ** Define Word

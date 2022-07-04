@@ -51,7 +51,7 @@ Beautifies the ivy buffer menu by displaying relevant icons besides the buffer n
 * Font
 I use 150 font height on Mac and 110 on my personal Linux systems.
 #+begin_src elisp
-  (set-face-attribute 'default nil :height (if IS-MAC 150 110) :font "Fira Code")
+  (set-face-attribute 'default nil :height (if IS-MAC 150 110))
 #+end_src
 
 * Modeline
