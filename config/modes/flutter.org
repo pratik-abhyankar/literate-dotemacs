@@ -1,0 +1,33 @@
+#+title: Flutter Config
+#+author: Pratik Abhyankar
+
+Everything in ~Flutter~ is basically ~Dart~, and hence needs support for that first.
+
+* Dart-mode
+Basic syntax highlighting and indentation for ~dart~ files.
+#+begin_src elisp
+  (use-package dart-mode
+    :custom
+    (dart-format-on-save t))
+    #+end_src
+
+* Lsp-dart
+This is what makes Emacs transform from a simple code editor to Dart IDE! Since
+I use ~Ubuntu~ and ~Mac~ systems, I try to set the path to ~dart-sdk~ as well. For
+~Ubuntu~ the recommended installation way is using ~snap~ package-manager, and I try
+to set the path accordingly. For ~Mac~, it is of course ~brew~, so I set the path
+for that according to ~brew~'s default installation directory.
+#+begin_src elisp
+  (use-package lsp-dart
+    :hook
+    (dart-mode . lsp-deferred)
+    :config
+    (when IS-LINUX
+      (setq lsp-dart-flutter-sdk-dir (concat (getenv "HOME") "/snap/flutter/common/flutter/"))
+      (setq lsp-dart-sdk-dir (concat (getenv "HOME") "/snap/flutter/common/flutter/bin/cache/dart-sdk/")))
+    (when IS-MAC
+      (setq lsp-dart-flutter-sdk-dir (concat (getenv "HOME") "/flutter/"))
+      (setq lsp-dart-sdk-dir (concat (getenv "HOME") "/flutter/bin/cache/dart-sdk/")))
+    (setq lsp-dart-dap-flutter-hot-reload-on-save t)
+    (setq lsp-dart-show-flutter-outline t))
+#+end_src

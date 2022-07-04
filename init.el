@@ -47,6 +47,7 @@
 (pratik/load-config-file "eloquence")
 
 (pratik/load-mode-config-file "rust")
+(pratik/load-mode-config-file "flutter")
 (pratik/load-mode-config-file "ledger")
 (pratik/load-mode-config-file "python")
 

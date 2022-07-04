@@ -46,6 +46,8 @@ all changes in a buffer at a glance!
     (setq projectile-completion-system 'ivy)
     (setq projectile-cache-file PROJECTILE-BOOKMARKS-FILE
           projectile-known-projects-file PROJECTILE-KNOWN-PROJECTS-FILE)
+    (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+    (add-to-list 'projectile-project-root-files-bottom-up "BUILD")
     (projectile-mode t))
 #+end_src
 
@@ -107,7 +109,6 @@ probably suck anyway! (damn, that was dark.. I am 59% sorry for that)
            (python-mode . lsp-deferred)
            (js-mode . lsp-deferred)
            (go-mode . lsp-deferred)
-           (dart-mode . lsp-deferred)
            (elixir-mode . lsp-deferred)
            (html-mode . lsp-deferred)
            (json-mode . lsp-deferred)
