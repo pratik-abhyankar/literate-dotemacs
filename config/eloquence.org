@@ -11,8 +11,9 @@ Spell checker for Emacs. ~spell-fu~ uses ~aspell~ to generate its word dictionar
 believe ~aspell~ is installed on ~Ubuntu~ out-of-the-box, but for ~Mac~ that's not the
 case. So I first try to install that with ~brew~.
 #+begin_src elisp
-  (when IS_MAC
-    (async-shell-command "brew install aspell"))
+  (when IS-MAC
+    (unless (executable-find "aspell")
+      (async-shell-command "brew install aspell")))
 
   (use-package spell-fu
     :config
@@ -62,18 +63,18 @@ PDF since it messes up Emacs performance.
 ** Markdown
 I agree ~org~ is better, but I need to work with markdown every now and then
 especially for work related documents. I use ~pandoc~ for extended markdown
-support like converting files to/from markdown formats or live previews etc. If
-it is installed on the system then it will use it, otherwise the extended
-features would not be available.
-
-If you are using Mac, you can install pandoc with ~brew install pandoc~.
-If you are using Debian (like Ubuntu) with ~apt~ support, then you can install
-pandoc with ~sudo apt install pandoc~.
+support like converting files to/from markdown formats or live previews etc. I
+try installing ~pandoc~ with this config if it is not already installed for ~Debian~
+distros like Ubuntu with ~apt~ and ~Mac~ with ~brew~. _NOTE_: It may prompt for user
+password.
 #+begin_src elisp
   (use-package markdown-mode
     :mode ("README\\.md\\'" . gfm-mode)
     :config
-    (cond
-     ((executable-find "pandoc")
-     (setq markdown-command "pandoc"))))
+    (unless (executable-find "pandoc")
+      (when IS-LINUX
+        (async-shell-command "sudo -S apt install pandoc"))
+      (when IS-MAC
+        (async-shell-command "brew install pandoc")))
+    (setq markdown-command "pandoc"))
 #+end_src
