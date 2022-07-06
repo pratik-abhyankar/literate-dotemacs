@@ -71,12 +71,12 @@ family. For some reason ~use-package~ fails to load the solarized theme so I
 use ~straight.el~ to install and load it explicitly.
 #+begin_src elisp
   (straight-use-package
-    '(solarized-emacs :type git :host github :repo "bbatsov/solarized-emacs"))
+   '(solarized-emacs :type git :host github :repo "bbatsov/solarized-emacs"))
   (require 'solarized)
   (setq
-    x-underline-at-descent-line nil
-    solarized-scale-markdown-headlines t
-    solarized-use-variable-pitch nil)
+   x-underline-at-descent-line nil
+   solarized-scale-markdown-headlines t
+   solarized-use-variable-pitch nil)
   (load-theme 'solarized-light-high-contrast t)
 #+end_src
 

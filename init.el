@@ -56,7 +56,7 @@
 ;; used files. I use this to open this 'init.el' and other daily used 'org' files.
 ;; Adapted from https://zzamboni.org blog.
 (defun pratik/add-file-keybinding (key file desc)
-	"Assign KEY as binding to open FILE repredented by an optional DESC."
+	"Assign KEY as binding to open FILE represented by an optional DESC."
   (let ((key key)
 				(file file)
 				(desc desc))

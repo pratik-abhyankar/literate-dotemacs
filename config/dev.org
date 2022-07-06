@@ -103,6 +103,9 @@ The core ~lsp-mode~ package. This is required. No exceptions. Unless you use
 probably suck anyway! (damn, that was dark.. I am 59% sorry for that)
 #+begin_src elisp
   (use-package lsp-mode
+    :init
+    (setq lsp-server-install-dir LSP-DIR)
+    (setq lsp-session-file LSP-SESSION-FILE)
     :hook ((lsp-mode . lsp-enable-which-key-integration)
            (java-mode . lsp-deferred)
            (rust-mode . lsp-deferred)
@@ -166,7 +169,9 @@ all modes. Gives me pretty handy completions especially for c++ and python which
 I use for competitive coding!
 #+begin_src elisp
   (use-package yasnippet
+    :init
     :config
+    (setq yas-snippet-dirs (list YASNIPPETS-DIR))
     (yas-global-mode t))
 #+end_src
 
@@ -175,5 +180,7 @@ I use for competitive coding!
 them from its official repository to make snippets work for our desired
 languages.
 #+begin_src elisp
-  (use-package yasnippet-snippets)
+  (use-package yasnippet-snippets
+    :config
+    (add-to-list 'yas-snippet-dirs yasnippet-snippets-dir))
 #+end_src

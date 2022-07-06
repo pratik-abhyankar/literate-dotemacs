@@ -14,6 +14,8 @@ Define system variables like OS name or Emacs version etc.
 #+end_src
 
 * Custom files and directories
+The list of directories and the code to create those is soon getting larger and
+repetitive. I soon need to refactor this. But probably not today.
 #+begin_src elisp
   (defconst CONFIG-DIR-NAME "config/")
 
@@ -27,6 +29,20 @@ Define system variables like OS name or Emacs version etc.
   (unless (file-directory-p SPELL-FU-DIR)
     (make-directory SPELL-FU-DIR))
 
+  (defconst LSP-CACHE-DIR-NAME ".cache/")
+  (defconst LSP-CACHE-DIR (expand-file-name (concat CUSTOM-DIR LSP-CACHE-DIR-NAME)))
+  (unless (file-directory-p LSP-CACHE-DIR)
+    (make-directory LSP-CACHE-DIR))
+  (defconst LSP-DIR-NAME "lsp/")
+  (defconst LSP-DIR (expand-file-name (concat LSP-CACHE-DIR LSP-DIR-NAME)))
+  (unless (file-directory-p LSP-DIR)
+    (make-directory LSP-DIR))
+
+  (defconst YASNIPPETS-DIR-NAME "snippets/")
+  (defconst YASNIPPETS-DIR (expand-file-name (concat CUSTOM-DIR YASNIPPETS-DIR-NAME)))
+  (unless (file-directory-p YASNIPPETS-DIR)
+    (make-directory YASNIPPETS-DIR))
+
   (defconst CUSTOM-FILE (expand-file-name "custom-file.el" CUSTOM-DIR))
   (defconst RECENTF-FILE (expand-file-name "recentf" CUSTOM-DIR))
   (defconst AMX-ITEMS-FILE (expand-file-name "amx-items" CUSTOM-DIR))
@@ -35,4 +51,5 @@ Define system variables like OS name or Emacs version etc.
   (defconst TRANSIENT-HISTORY-FILE (expand-file-name "history.el" CUSTOM-DIR))
   (defconst TRANSIENT-VALUES-FILE (expand-file-name "values.el" CUSTOM-DIR))
   (defconst TRANSIENT-LEVELS-FILE (expand-file-name "levels.el" CUSTOM-DIR))
+  (defconst LSP-SESSION-FILE (expand-file-name ".lsp-session-v1" CUSTOM-DIR))
 #+end_src
